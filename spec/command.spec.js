@@ -24,16 +24,3 @@ describe("Command class", function() {
     expect(testParameterNum.value).toBe(12000)
   });
 });
-/*
-  test("constructor sets command type", function () {
-    let testParameter = new Command (commandType, value);
-    expect(testParameter.commandType).toBe(commandType)
-  });
-
-  test ("constructor sets a value passed in as the 2nd argument", function () {
-    //
-  });
-
-});
-*/
-//describe (“constructor sets command type”, )

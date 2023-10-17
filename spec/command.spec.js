@@ -13,14 +13,14 @@ describe("Command class", function() {
   });
 
   test("constructor sets command type", function () {
-    let testParameter = new Command ('MODE_CHANGE', 'LOW_POWER');
-    expect(testParameter.commandType).toBe('MODE_CHANGE')
+    let testParameter = [new Command ('MODE_CHANGE', 'LOW_POWER'), new Command ('MOVE', 12000)];
+    expect(testParameter[0].commandType).toBe('MODE_CHANGE');
+    expect(testParameter[1].commandType).toBe('MOVE');
   });
 
   test("constructor sets a value passed in as the 2nd argument", function () {
-    let testParameterStr = new Command ('MODE_CHANGE', 'LOW_POWER');
-    let testParameterNum = new Command ('MOVE', 12000);
-    expect(testParameterStr.value).toBe('LOW_POWER')
-    expect(testParameterNum.value).toBe(12000)
+    let testParameter = [new Command ('MODE_CHANGE', 'LOW_POWER'), new Command ('MOVE', 12000)];
+    expect(testParameter[0].value).toBe('LOW_POWER');
+    expect(testParameter[1].value).toBe(12000);
   });
 });

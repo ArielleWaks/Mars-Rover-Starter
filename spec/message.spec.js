@@ -13,7 +13,8 @@ describe("Message class", function() {
     });
 
     test('constructor sets name', function () {
-        let messageNameTest = new Message ('Test message name', commands);
+        let commandArray = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
+        let messageNameTest = new Message ('Test message name', commandArray);
         expect (messageNameTest.name).toBe('Test message name')
     });
 

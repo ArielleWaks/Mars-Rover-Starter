@@ -2,8 +2,6 @@ const Rover = require('../rover.js');
 const Message = require('../message.js');
 const Command = require('../command.js');
 
-// NOTE: If at any time, you want to focus on the output from a single test, feel free to comment out all the others.
-//       However, do NOT edit the grading tests for any reason and make sure to un-comment out your code to get the autograder to pass.
 
 
 describe("Rover class", function() {
@@ -16,7 +14,6 @@ describe("Rover class", function() {
   });
 
   test('response returned by receiveMessage contains the name of the message', () => {
-    // let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
     let message = new Message('Test message with no commands', []);
     let rover = new Rover(98382);
     expect(rover.receiveMessage(message)).toHaveProperty('message', message.name);
@@ -46,15 +43,10 @@ describe("Rover class", function() {
 
 
   test('responds correctly to the mode change command', () => {
-    let commands = [
-      new Command ('MODE_CHANGE', 'LOW_POWER'), 
-      /*new Command('STATUS_CHECK'),
-      new Command('MOVE', 12000)*/
-    ];
+    let commands = [ new Command ('MODE_CHANGE', 'LOW_POWER') ];
     let message = new Message('Test message with low power', commands);
     let rover = new Rover(98382);
     expect(rover.receiveMessage(message)).toHaveProperty('message', 'Test message with low power');
-
 
   });
 
@@ -76,8 +68,6 @@ describe("Rover class", function() {
     expect(rover.position).toBe(12000);
 
   });
-
-
 
 
 });

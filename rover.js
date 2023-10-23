@@ -12,27 +12,19 @@ class Rover {
    generatorWatts = 110;
 
    receiveMessage(message) {
-      let resultArray = [];
-      let resultObject = {};
       let completed = true;
-      // let mode = this.mode;
-      // let generatorWatts = this.generatorWatts;
-      for (let i=0; i < message.commands.length; i++) {
-         if (message.commands[i].commandType === 'MOVE') {
+      const results = message.commands.map((command) => {
+         if (command.commandType === 'MOVE') {
             if (this.mode === 'NORMAL') {
-               this.position = message.commands[i].value;
+               this.position = command.value;
                completed = true;
             } else if (this.mode === 'LOW_POWER') {
                completed = false;
             };
-            resultObject = {
-               'completed': completed
-            };
-            
-            
+            return { 'completed': completed };
          } 
-         if (message.commands[i].commandType === 'STATUS_CHECK') {
-            resultObject = {
+         if (command.commandType === 'STATUS_CHECK') {
+            return {
                'completed': completed,
                'roverStatus': {
                   'mode': this.mode, 
@@ -40,23 +32,21 @@ class Rover {
                   'position': this.position
                }
             };
-
          } 
-         if (message.commands[i].commandType === 'MODE_CHANGE') {
-            this.mode = message.commands[i].value;
+         if (command.commandType === 'MODE_CHANGE') {
+            this.mode = command.value;
             completed = true;
-            resultObject = {
-               'completed': completed
-            };
+            return { 'completed': completed };
          };
-         resultArray.push(resultObject);
-      }
+      })
+
       let output = {
          'message' : message.name,
-         'results' : resultArray
+         'results' : results
       };
       return output;
    }
+
 }
 
 let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];

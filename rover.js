@@ -12,39 +12,32 @@ class Rover {
    generatorWatts = 110;
 
    receiveMessage(message) {
-      let completed = true;
       const results = message.commands.map((command) => {
          if (command.commandType === 'MOVE') {
             if (this.mode === 'NORMAL') {
                this.position = command.value;
-               completed = true;
+               return { 'completed': true };
             } else if (this.mode === 'LOW_POWER') {
-               completed = false;
+               return { 'completed': false };
             };
-            return { 'completed': completed };
-         } 
-         if (command.commandType === 'STATUS_CHECK') {
+         } else if (command.commandType === 'STATUS_CHECK') {
             return {
-               'completed': completed,
+               'completed': true,
                'roverStatus': {
                   'mode': this.mode, 
                   'generatorWatts': this.generatorWatts, 
                   'position': this.position
                }
             };
-         } 
-         if (command.commandType === 'MODE_CHANGE') {
+         } else if (command.commandType === 'MODE_CHANGE') {
             this.mode = command.value;
-            completed = true;
-            return { 'completed': completed };
-         };
+            return { 'completed': true };
+         } else {
+            return { 'completed': false, 'error': "unknown commandType: " + command.commandType };
+         }
       })
 
-      let output = {
-         'message' : message.name,
-         'results' : results
-      };
-      return output;
+      return { 'message' : message.name, 'results' : results };
    }
 
 }

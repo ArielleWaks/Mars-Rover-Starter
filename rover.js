@@ -28,7 +28,7 @@ class Rover {
             resultObject = {
                'completed': completed
             };
-            resultArray.push(resultObject);
+            
             
          } 
          if (message.commands[i].commandType === 'STATUS_CHECK') {
@@ -40,7 +40,6 @@ class Rover {
                   'position': this.position
                }
             };
-            resultArray.push(resultObject);
 
          } 
          if (message.commands[i].commandType === 'MODE_CHANGE') {
@@ -49,8 +48,8 @@ class Rover {
             resultObject = {
                'completed': completed
             };
-            resultArray.push(resultObject)
          };
+         resultArray.push(resultObject);
       }
       let output = {
          'message' : message.name,

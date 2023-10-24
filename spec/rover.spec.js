@@ -36,9 +36,9 @@ describe("Rover class", function() {
     let rover = new Rover(98382);
     expect(rover.receiveMessage(message).results[0]).toHaveProperty('completed', true);
     expect(rover.receiveMessage(message).results[0]).toHaveProperty('roverStatus');
-    expect(rover.receiveMessage(message).results[0]).toHaveProperty('roverStatus.mode');
-    expect(rover.receiveMessage(message).results[0]).toHaveProperty('roverStatus.generatorWatts');
-    expect(rover.receiveMessage(message).results[0]).toHaveProperty('roverStatus.position');
+    expect(rover.receiveMessage(message).results[0]).toHaveProperty('roverStatus.mode', 'NORMAL');
+    expect(rover.receiveMessage(message).results[0]).toHaveProperty('roverStatus.generatorWatts', 110);
+    expect(rover.receiveMessage(message).results[0]).toHaveProperty('roverStatus.position', 98382);
   });
 
 
@@ -57,7 +57,10 @@ describe("Rover class", function() {
     let commands = [new Command ('MODE_CHANGE', 'LOW_POWER'), new Command ('MOVE', 12000)];
     let message = new Message('Test message with low power move', commands);
     let rover = new Rover(98382);
+    rover.receiveMessage(message);
     expect(rover.receiveMessage(message).results[1]).toHaveProperty('completed', false);
+    expect(rover.receiveMessage(message).results[1].completed).toBeFalsy();
+    expect(rover.position).toBe(98382);
 
   });
 

@@ -2,7 +2,6 @@ const Command = require('./command.js');
 const Message = require('./message.js');
 
 class Rover {
-   // Write code here!
    
    constructor (position) {
       this.position = position;
@@ -42,9 +41,9 @@ class Rover {
 
 }
 
-let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
-let message = new Message('Test message with two commands', commands);
-let rover = new Rover(98382);
-console.log(JSON.stringify(rover.receiveMessage(message), null, "  "));
+// let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
+// let message = new Message('Test message with two commands', commands);
+// let rover = new Rover(98382);
+// console.log(JSON.stringify(rover.receiveMessage(message), null, "  "));
 
 module.exports = Rover;

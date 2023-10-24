@@ -46,7 +46,9 @@ describe("Rover class", function() {
     let commands = [ new Command ('MODE_CHANGE', 'LOW_POWER') ];
     let message = new Message('Test message with low power', commands);
     let rover = new Rover(98382);
-    expect(rover.receiveMessage(message)).toHaveProperty('message', 'Test message with low power');
+    rover.receiveMessage(message);
+    expect(rover.receiveMessage(message).results).toStrictEqual([{'completed': true}]);
+    expect(rover.mode).toBe('LOW_POWER');
 
   });
 
